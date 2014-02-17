@@ -1,0 +1,81 @@
+﻿/*Style para la página*/
+
+.menu {
+    list-style: none;
+}
+
+.error {
+    color: red;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #ced5ff;
+    font-family: Tahoma;
+    font-size:15px;
+}
+
+
+.encabezado .menu {
+    float: right;
+}
+
+    .encabezado .menu li {
+        float: right;
+    }
+
+    .encabezado .menu a {
+        color: #1a4971;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .encabezado .menu li {
+        margin-left: 20px;
+    }
+
+.titulo {
+    border-color: rgba(0, 0, 0, 0.59);
+    border-bottom-style: solid;
+    font-family: Calibri;
+    font-size: 40px;
+    float: left;
+    margin: 0px;
+}
+
+#menu {
+    margin-left: 0;
+    text-align: center;
+}
+
+.pagina .menu {
+    background-color: rgba(255, 255, 255, 0.69);
+}
+
+    .pagina .menu li {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: 20px;
+        text-align: center;
+        vertical-align: central;
+        display: inline-block;
+    }
+
+    .pagina .menu a {
+        color: #000000;
+        font-size: 20px;
+    }
+
+    .pagina .menu .seleccionado {
+        font-weight: bolder;
+        text-decoration:underline;
+    }
+
+    .pagina .menu a:hover {
+        text-decoration:underline;
+    }
