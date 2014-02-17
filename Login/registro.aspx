@@ -32,9 +32,5 @@
             <asp:Button runat="server" text="Registrar" id="RegBRegistrar"/>
         </form>
     </div>
-    <div class="pie">
-        <br />
-        Prueba de login.
-    </div>
 </body>
 </html>

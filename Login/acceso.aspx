@@ -19,7 +19,9 @@
               else 
               {
                   Response.Write( "<li><a href=\"salir.aspx\"><u>Salir</u></a></li>"+
-                      "<li><a href=\"administracion.aspx\"><u>" + Session["entradaUsuario"] + "</u></a></li>");
+                      "<li><a href=\"administracion.aspx\"><u>" + Session["entradaUsuario"] + "</u></a></li>"+
+                      "<li><a href=\"archivos.aspx\">Mis Archivos</a></li>"+
+                      "<li><a href=\"index.aspx\"><u>Inicio</u></a></li>");
               }
             %>
         </ul>
@@ -40,10 +42,6 @@
             <asp:HyperLink id="AccHLOlvido" runat="server" NavigateUrl="recuperar.aspx" Text="¿Olvidaste tu contraseña?" />
     
         </form>
-    </div>
-    <div class="pie">
-        <br />
-        Prueba de login.
     </div>
 </body>
 </html>

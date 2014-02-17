@@ -19,7 +19,8 @@
               else 
               {
                   Response.Write( "<li><a href=\"salir.aspx\"><u>Salir</u></a></li>"+
-                      "<li><a href=\"administracion.aspx\"><u>" + Session["entradaUsuario"] + "</u></a></li>");
+                      "<li><a href=\"administracion.aspx\"><u>" + Session["entradaUsuario"] + "</u></a></li>"+
+                      "<li><a href=\"archivos.aspx\">Mis Archivos</a></li>");
               }
             %>
         </ul>
@@ -39,10 +40,6 @@
             <br />
             Contenido de la página 2.
         </div>
-    </div>
-    <div class="pie">
-        <br />
-        Prueba de login.
     </div>
 </body>
 </html>

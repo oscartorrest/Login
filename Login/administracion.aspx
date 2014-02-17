@@ -14,6 +14,7 @@
             <%if (Session["entradaUsuario"] != null)
               {
                   Response.Write( "<li><a href=\"salir.aspx\"><u>Salir</u></a></li>"+
+                      "<li><a href=\"archivos.aspx\">Mis Archivos</a></li>" +
                       "<li><a href=\"index.aspx\"><u>Inicio</u></a></li>");
               }
             %>

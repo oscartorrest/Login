@@ -14,7 +14,14 @@ namespace Login
         {
             if (Session["entradaUsuario"] == null) 
             {
-                Response.Redirect(Convert.ToString(Session["anterior"]));
+                if (Session["anterior"] != null)
+                {
+                    Response.Redirect(Convert.ToString(Session["anterior"]));
+                }
+                else 
+                {
+                    Response.Redirect("acceso.aspx");
+                }
             }
             else 
             {
