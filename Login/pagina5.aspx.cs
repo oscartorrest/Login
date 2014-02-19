@@ -11,7 +11,16 @@ namespace Login
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["anterior"] = "pagina5.aspx";
+            // Se establece que la última página, de las 5 de contenido, donde se estuvo es esta. 
+            try
+            {
+                Session["anterior"] = "pagina5.aspx";
+            }
+            catch (Exception)
+            {
+                Response.Write("Se ha generado un problema inesperado, favor de volver a cargar la página más tarde");
+                Response.Write("<br/>EP0108");
+            }
         }
     }
 }

@@ -20,13 +20,14 @@
     <br />
     <div class="pagina">
         <h2>Recuperación de contraseña</h2>
-    <form runat="server">
-        <asp:TextBox ID="OlvTBCorreo" runat="server" MaxLength="50" ></asp:TextBox><br />
-        <asp:Label ID="OlvLMensaje" runat="server"><b>Escribe 
+        <form runat="server">
+            <asp:TextBox ID="OlvTBCorreo" runat="server" MaxLength="50"></asp:TextBox><br />
+            <asp:Label ID="OlvLMensaje" runat="server"><b>Escribe 
             el correo electrónico de tu cuenta y 
-            te mandaremos a ese correo tu contraseña.</b></asp:Label><br /><br />
-        <asp:Button ID="OlvBEnviar" runat="server" Text="Enviar" />
-    </form>
-        </div>
+            te mandaremos a ese correo tu contraseña.</b></asp:Label><br />
+            <br />
+            <asp:Button ID="OlvBEnviar" runat="server" Text="Enviar" />
+        </form>
+    </div>
 </body>
 </html>

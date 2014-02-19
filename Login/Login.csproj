@@ -101,7 +101,7 @@
     <Compile Include="bajaArchivo.aspx.designer.cs">
       <DependentUpon>bajaArchivo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Helper.cs" />
+    <Compile Include="SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

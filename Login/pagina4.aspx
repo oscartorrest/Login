@@ -11,17 +11,18 @@
     <div class="encabezado">
         <h1 class="titulo">Nombre del Sitio</h1>
         <ul class="menu">
-                        <%if (Session["entradaUsuario"] == null)
-              {
-                  Response.Write("<li><a href=\"acceso.aspx\"><u>Acceder</u></a></li>"
-                  +"<li><a href=\"registro.aspx\"><u>Registrar</u></a></li>"); 
-              }
-              else 
-              {
-                  Response.Write( "<li><a href=\"salir.aspx\"><u>Salir</u></a></li>"+
-                      "<li><a href=\"administracion.aspx\"><u>" + Session["entradaUsuario"] + "</u></a></li>"+
-                      "<li><a href=\"archivos.aspx\">Mis Archivos</a></li>");
-              }
+            <%--Se cargan las opciones según si la sesión se ha iniciado o no--%>
+              <%if (Session["nombreUsuario"] == null)
+                {
+                    Response.Write("<li><a href=\"acceso.aspx\"><u>Acceder</u></a></li>"
+                    + "<li><a href=\"registro.aspx\"><u>Registrar</u></a></li>");
+                }
+                else
+                {
+                    Response.Write("<li><a href=\"salir.aspx\"><u>Salir</u></a></li>" +
+                        "<li><a href=\"administracion.aspx\"><u>" + Session["nombreUsuario"] + "</u></a></li>" +
+                        "<li><a href=\"archivos.aspx\"><u>Mis Archivos</u></a></li>");
+                }
             %>
         </ul>
     </div>

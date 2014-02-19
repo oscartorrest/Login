@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="registro.aspx.cs" Inherits="Login.WebForm6" EnableSessionState="true"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="registro.aspx.cs" Inherits="Login.WebForm6" EnableSessionState="true" %>
 
 <!DOCTYPE html>
 
@@ -21,15 +21,19 @@
     <div class="pagina">
         <h2>Registro</h2>
         <form runat="server">
-            <asp:TextBox id="RegTBNombre" MaxLength="100" runat="server"/><br />
-            <asp:Label id="RegLNombre" runat="server" text="<b>Nombre</b>"/><br /><br />
-            <asp:TextBox id="RegTBCorreo" MaxLength="50" runat="server"/><br />
-            <asp:Label id="RegLCorreo" runat="server" text="<b>Correo</b>"/><br /><br />
-            <asp:TextBox id="RegTBContrasena" MaxLength="15" TextMode="password" runat="server"/><br />
-            <asp:Label id="RegLContrasena" runat="server" text="<b>Contraseña</b>"/><br /><br />
-            <asp:TextBox id="RegTBRepContrasena" MaxLength="15" TextMode="password" runat="server"/><br />
-            <asp:Label id="RegLRepContrasena" runat="server" text="<b>Repita Contraseña</b>"/><br /><br />
-            <asp:Button runat="server" text="Registrar" id="RegBRegistrar"/>
+            <asp:TextBox ID="RegTBNombre" MaxLength="100" runat="server" /><br />
+            <asp:Label ID="RegLNombre" runat="server" Text="<b>Nombre</b>" /><br />
+            <br />
+            <asp:TextBox ID="RegTBCorreo" MaxLength="50" runat="server" /><br />
+            <asp:Label ID="RegLCorreo" runat="server" Text="<b>Correo</b>" /><br />
+            <br />
+            <asp:TextBox ID="RegTBContrasena" MaxLength="15" TextMode="password" runat="server" /><br />
+            <asp:Label ID="RegLContrasena" runat="server" Text="<b>Contraseña</b>" /><br />
+            <br />
+            <asp:TextBox ID="RegTBRepContrasena" MaxLength="15" TextMode="password" runat="server" /><br />
+            <asp:Label ID="RegLRepContrasena" runat="server" Text="<b>Repita Contraseña</b>" /><br />
+            <br />
+            <asp:Button runat="server" Text="Registrar" ID="RegBRegistrar" />
         </form>
     </div>
 </body>

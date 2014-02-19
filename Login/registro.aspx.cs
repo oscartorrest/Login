@@ -5,87 +5,99 @@ using System.Data.SqlClient;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
+using System.Data;
 
 namespace Login
 {
     public partial class WebForm6 : System.Web.UI.Page
     {
-        TextBox[] campos;
-        Label[] etiquetas;
+        private TextBox[] campos;
+        private Label[] etiquetas;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            campos = new TextBox[]
+            try
             {
-                RegTBNombre,RegTBCorreo,RegTBContrasena,RegTBRepContrasena
-            };
-            etiquetas = new Label[]
-            {
-            RegLNombre,RegLCorreo,RegLContrasena,RegLRepContrasena
-            };
-            if (Session["entradaUsuario"] != null)
-            {
-                Response.Redirect(Convert.ToString(Session["anterior"]));
-            }
-            else
-            {
-                RegBRegistrar.Click += new EventHandler(this.Click_RegRRegistrar);
-                               if (Session["correo"] != null)
-               {
-                    RegTBCorreo.Text = Convert.ToString(Session["correo"]);
-                    RegTBNombre.Text = Convert.ToString(Session["nombre"]);
-                    Session["correo"] = null;
-                    Session["nombre"] = null;
-                }
-                else 
+                //Si ya hay una sesión abierta se redirecciona a la última página de cotenido activa.
+                // Si no entonces se cargan los arreglos de cuadros de texto y labels,
+                // además se vuelve a cargar e correo y el nombre de usuario si es que está página
+                // está siendo cargada debido a un error en los requerimientos.
+                if (Session["nombreUsuario"] != null)
                 {
-                    etiquetas[0].Text = "<b>Nombre</b>";
-                    etiquetas[0].CssClass = "";
-                    etiquetas[1].Text = "<b>Correo</b>";
-                    etiquetas[1].CssClass = "";
+                    Response.Redirect(Convert.ToString(Session["anterior"]));
                 }
-
+                else
+                {
+                    campos = new TextBox[] { RegTBNombre, RegTBCorreo, RegTBContrasena, RegTBRepContrasena };
+                    etiquetas = new Label[] { RegLNombre, RegLCorreo, RegLContrasena, RegLRepContrasena };
+                    RegBRegistrar.Click += new EventHandler(this.Click_RegRRegistrar);
+                    if (Session["correo"] != null)
+                    {
+                        RegTBCorreo.Text = Convert.ToString(Session["correo"]);
+                        RegTBNombre.Text = Convert.ToString(Session["nombre"]);
+                        Session["correo"] = null;
+                        Session["nombre"] = null;
+                    }
+                    else
+                    {
+                        etiquetas[0].Text = "<b>Nombre</b>";
+                        etiquetas[0].CssClass = "";
+                        etiquetas[1].Text = "<b>Correo</b>";
+                        etiquetas[1].CssClass = "";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Response.Write("Se ha generado un problema inesperado, favor de volver a cargar la página más tarde");
+                Response.Write("<br/>EP0112");
             }
         }
 
         protected void Click_RegRRegistrar(Object sender, EventArgs e)
         {
-            Boolean llenos = true;
-            for (int i = 0; i < campos.Length; i++)
+            try
             {
-                if (campos[i].Text.Equals(""))
+                // Se checa si todos los campos a llenar tienen texto.
+                Boolean llenos = true;
+                for (int i = 0; i < campos.Length; i++)
                 {
+                    if (campos[i].Text.Equals(""))
+                    {
+                        llenos = false;
+                        etiquetas[i].CssClass = "error";
+                    }
+                    else
+                    {
+                        etiquetas[i].CssClass = "";
+                    }
+                }
+                // Se checa si las contraseñas son iguales. Si no son iguales se marca el error y se toma como si los campos no estuvieran llenos.
+                if (!campos[2].Text.Equals(campos[3].Text))
+                {
+                    etiquetas[3].Text = "<b>Las contraseñas deben de ser iguales</b>";
+                    etiquetas[3].CssClass = "error";
                     llenos = false;
-                    etiquetas[i].CssClass = "error";
                 }
                 else
                 {
-                    etiquetas[i].CssClass = "";
+                    etiquetas[3].Text = "<b>Repita contraseña</b>";
+                    etiquetas[3].CssClass = llenos ? "" : "error";
                 }
-            }
-            if (!campos[2].Text.Equals(campos[3].Text))
-            {
-                etiquetas[3].Text = "<b>Las contraseñas deben de ser iguales</b>";
-                etiquetas[3].CssClass = "error";
-                llenos = false;
-            }
-            else
-            {
-                etiquetas[3].Text = "<b>Repita contraseña</b>";
-                etiquetas[3].CssClass = llenos ? "" : "error";
-            }
-            if (llenos)
-           {
-                SqlConnection conexion = Helper.GetConnection("data source=localhost;user id=publico;password=12345678");
-                SqlCommand comando = Helper.GetCommand(conexion, "EXEC dbo.Agrega_Usuario @nombre='"
-                    + campos[0].Text +
-                    "', @correo='" +
-                    campos[1].Text
-                    + "', @contrasena='" +
-                    campos[2].Text
-                    + "';", System.Data.CommandType.Text);
-                try
+                // Si los campos están llenos s
+                if (llenos)
                 {
-                    int num = Convert.ToInt32(comando.ExecuteScalar());
+                    // Se checa si el usuario existen en la base de datos.
+                    // Si el correo del usuario ya existe en la base de datos manda ésta regresa un 0
+                    // significando que no se agregó el usuario a la base de datos. De lo contrario
+                    // la base de datos regresa un 1 por un registro exitoso.
+                    SqlCommand cmd = new SqlCommand("dbo.test_AddUser");
+                    cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = campos[0].Text;
+                    cmd.Parameters.Add("@mail", SqlDbType.VarChar).Value = campos[1].Text;
+                    cmd.Parameters.Add("@password", SqlDbType.VarChar).Value = campos[2].Text;
+                    DataTable tabla = SQLHelper.runStoredProcedure(cmd);
+                    int num = Convert.ToInt32(tabla.Rows[0][0]);
                     if (num == 0)
                     {
                         etiquetas[1].Text = "<b>Este correo ya está asociado a una cuenta</b>";
@@ -107,7 +119,10 @@ namespace Login
                         RegBRegistrar.Visible = false;
                     }
                 }
-                catch (Exception)
+            }
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException || ex is SqlException || ex is ConfigurationErrorsException)
                 {
                     for (int i = 0; i < campos.Length; i++)
                     {
@@ -119,9 +134,12 @@ namespace Login
                     etiquetas[0].CssClass = "error";
                     RegBRegistrar.Visible = false;
                 }
-
+                else
+                {
+                    Response.Write("Se ha generado un problema inesperado, favor de volver a cargar la página más tarde");
+                    Response.Write("<br/>EP0113");
+                }
             }
         }
-
     }
 }

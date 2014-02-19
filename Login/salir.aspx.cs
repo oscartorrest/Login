@@ -11,9 +11,26 @@ namespace Login
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["entradaUsuario"] = null;
-            Session["correoUsuario"] = null;
-            Response.Redirect(Convert.ToString(Session["anterior"]));
+            try
+            {
+                // Elimina los datos de la sesión y redirige a la última 
+                // de las 5 páginas de contenido donde se estuvo.
+                Session["nombreUsuario"] = null;
+                Session["correoUsuario"] = null;
+                if (Session["anterior"] == null) 
+                {
+                    Response.Redirect("index.aspx");
+                }
+                else
+                {
+                    Response.Redirect(Convert.ToString(Session["anterior"]));
+                }
+            }
+            catch (Exception)
+            {
+                Response.Write("Se ha generado un problema inesperado, favor de volver a cargar la página más tarde");
+                Response.Write("<br/>EP0103");
+            }
         }
     }
 }

@@ -23,6 +23,12 @@ EXEC dbo.Cambia_Contrasena
 @contrasenaNueva='160592ya',
 @contrasenaAntigua='9688057LOLya';
 
+EXEC dbo.Add_File
+@correo='oscar.torres@iexglobal.com',
+@name ='hola.xlsx';
+
 select * from Usuario;
 
-delete from Usuario;
+select * from Files;
+
+delete from Files;
